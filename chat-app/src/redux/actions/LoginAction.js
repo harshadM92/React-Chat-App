@@ -3,8 +3,9 @@ const userNameList = [
     's123'
 ]
 export const login = (userName, password) => {
+    debugger
     return dispatch => {
-        if (userNameList.indexOf(userName) > 0 && password === '123') {
+        if (userNameList.indexOf(userName) !== -1 && password === '123') {
             sessionStorage.setItem('login_user_name', userName);
             dispatch(saveUserDetail(userName));
             return Promise.resolve(true);

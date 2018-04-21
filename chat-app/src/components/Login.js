@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import * as LoginActions from '../redux/actions/LoginAction';
-import { getLoacalStorageItem } from '../utils/util';
+import { getSessionStorageItem } from '../utils/util';
 
 const initialState = {
     userName: '',
@@ -15,8 +15,8 @@ class Login extends Component {
         super(props);
         this.state = initialState;
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        if (getLoacalStorageItem('login_user_name')) {
+        this.login = this.login.bind(this);
+        if (getSessionStorageItem('login_user_name')) {
             props.history.push('/home');
         } else {
             props.logout(props.history);
@@ -28,7 +28,7 @@ class Login extends Component {
             [name]: value
         });
     }
-    handleSubmit(event) {
+    login(event) {
         const { userName, password } = this.state;
         this.props.login(userName, password).then((success) => {
             if (success) {
@@ -52,7 +52,8 @@ class Login extends Component {
                             <div className="my-2 d-flex">
                                 <Input type="password" name="password" value={password} onChange={this.handleChange} placeholder="Enter Password" />
                             </div>
-                            <div className="text-center my-2"><Button color="primary" onClick={() => this.handleSubmit()} >Login</Button></div>
+                            <div className="text-center my-2"><Button color="primary" onClick={() => this.login()} >Login</Button></div>
+                            <div className="text-center my-2"><Button color="secondary" onClick={() => this.login()} >Signup</Button></div>
                         </div>
                     </div>
                 </form>
@@ -68,5 +69,4 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(LoginActions, dispatch);
 }
-
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

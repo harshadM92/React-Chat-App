@@ -22,7 +22,7 @@ class ChatInput extends Component {
         const { chatText } = this.state;
         return (
             <div className="chat-chat-input d-flex flex-row">
-                <Input type="text" name="chatText" value={chatText} onChange={this.handleChange} placeholder="Type Chatting" />
+                <Input type="text" name="chatText" value={chatText} onChange={this.handleChange} placeholder="Start Chatting" />
                 <Button color="primary" className="rounded-circle ml-3" onClick={()=>this.sendMessage()}><i className="fa fa-paper-plane" /></Button>
             </div>
         )

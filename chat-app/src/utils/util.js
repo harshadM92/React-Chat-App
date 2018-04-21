@@ -5,6 +5,6 @@ export const setSocket = (socketObj) => {
 export const sendMessage = (messageObj) => {
     socket.emit('exchange-message', messageObj);
 };
-export const getLoacalStorageItem = (key) => {
+export const getSessionStorageItem = (key) => {
     return sessionStorage.getItem(key);
 }
